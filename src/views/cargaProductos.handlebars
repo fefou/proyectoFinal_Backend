@@ -1,0 +1,49 @@
+<h2>CARGA PRODUCTOS</h2>
+<hr />
+
+<script src="socket.io/socket.io.js"></script>
+<script src="js/ws.js"></script>
+
+{{#if mensajeBienvenida}}
+<div style="color: green;">{{mensajeBienvenida}}</div>
+{{/if}}
+
+
+<div>
+  {{#each products}}
+  <p><a href="/realtimeproducts/{{this._id}}">{{this.title}}</a></p>
+  <!-- Link al producto -->
+  <strong>
+    <p>{{this.price}}</p>
+  </strong>
+  <form method="POST" action="/api/products/{{this._id}}?_method=DELETE">
+    <button type="submit">DELETE</button>
+  </form>
+
+  <form method="POST" action="/api/products/{{this._id}}?_method=PUT">
+  <label for="name">Nombre:</label>
+  <input type="text" id="name" name="title" value="{{this.title}}">
+  <label for="stock">Stock:</label>
+  <input type="number" id="stock" name="stock" value="{{this.stock}}">
+  <button type="submit">Actualizar</button>
+</form>
+
+  
+  <hr />
+  {{/each}}
+</div>
+
+<a href="/realtimeproducts/?pagina=1&limit={{limit}}&category={{category}}&sort={{sort}}">Pág.1</a>
+
+{{#if hasPrevPage}}
+<a href="/realtimeproducts/?pagina={{prevPage}}&limit={{limit}}&category={{category}}&sort={{sort}}">Pág.Ant.</a>
+{{else}}
+<span>Pág.Ant.</span>
+{{/if}}
+
+{{#if hasNextPage}}
+<a
+  href="/realtimeproducts/?pagina={{nextPage}}&limit={{limit}}&category={{category}}&sort={{sort}}">Pág.Sig.</a>{{else}}<span>Pág.Sig.</span>
+{{/if}}
+
+<a href="/realtimeproducts/?pagina={{totalPages}}&limit={{limit}}&category={{category}}&sort={{sort}}">Pág.Final</a>

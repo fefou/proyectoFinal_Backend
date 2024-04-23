@@ -1,0 +1,60 @@
+<h1>Carrito</h1>
+
+{{#if mensajeBienvenida}}
+<div style="color: green;">{{mensajeBienvenida}}</div>
+{{/if}}
+
+<ul>
+  {{#each cart.products}}
+  <li>
+    <h2>{{this.product.title}}</h2> <!-- Nombre del producto -->
+    <p>Cantidad: {{this.quantity}}</p>
+    <p>Precio por unidad: {{this.product.price}}</p>
+
+    <form method="POST" action="/api/carts/{{../cart._id}}/products/{{this.product._id}}?_method=DELETE">
+      <button type="submit">Eliminar Producto</button>
+    </form>
+
+    <form method="POST" action="/api/carts/{{../cart._id}}/products/{{this.product._id}}/update">
+      <input type="number" name="quantity" value="{{this.quantity}}" min="1">
+      <button type="submit">Actualizar Cantidad</button>
+    </form>
+  </li>
+  {{/each}}
+</ul>
+
+<p>Total de productos diferentes: {{cart.products.length}}</p>
+<form method="POST" action="/api/carts/{{cart._id}}?_method=DELETE">
+  <button type="submit">Vaciar Carrito</button>
+</form>
+
+<form id="comprarForm" method="POST" action="/{{cart._id}}/purchase">
+  <button id="comprarBtn" type="submit">Comprar</button>
+</form>
+
+<script>
+  document.getElementById('comprarBtn').addEventListener('click', function (event) {
+    event.preventDefault();
+
+    fetch('/{{cart._id}}/purchase', { method: 'POST' })
+      .then(response => {
+        if (response.ok) {
+          return fetch('/api/tickets/emailticket', { method: 'POST' });
+              return res.redirect(`/carts/${carrito}?mensajeBienvenida=Compra realizada`);
+        } else {
+          throw new Error('Error al realizar la compra');
+        }
+      })
+      .then(response => {
+        if (response.ok) {
+          console.log('Compra realizada y correo electrónico enviado');
+              return res.redirect(`/carts/${carrito}?mensajeBienvenida=Compra realizada`);
+        } else {
+          throw new Error('Error al enviar el correo electrónico del ticket');
+        }
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  });
+</script>

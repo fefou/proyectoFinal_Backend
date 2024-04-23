@@ -1,0 +1,155 @@
+# https://swagger.io/docs/specification/basic-structure/
+
+paths:
+  /api/carts/:
+    get:
+      summary: Obtiene todos los carritos
+      tags:
+        - Carts
+      responses:
+        "200":
+          description: Los carritos fueron obtenidos OK desde la BD
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  products:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Carts"
+    post:
+      summary: Crea un carrito
+      tags:
+        - Carts
+      responses:
+        "201":
+          description: Carrito creado correctamente
+
+  /api/carts/{cartId}:
+    get:
+      summary: Obtiene el carrito
+      parameters:
+        - name: cartId
+          in: path
+          required: true
+          description: Obtiene el carrito seleccionado por ID
+          schema:
+            $ref: "#/components/schemas/Carts"
+      tags:
+        - Carts
+      responses:
+        "200":
+          description: Se obtuvo el carrito correctamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  products:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Carts"
+        "400":
+          description: Error de ID
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/errorId1"
+                  - $ref: "#/components/schemas/errorIdCarrito"
+        "500":
+          description: Error al buscar el carrito
+    delete:
+      summary: Elimina un carrito
+      tags:
+        - Carts
+      responses:
+        "200":
+          description: Carrito eliminado
+        "404":
+          description: Carrito no encontrado
+        "500":
+          description: Error inesperado
+  /api/carts/{cartId}/products/{productId}:
+    post:
+      summary: Agrega un producto al carrito
+      tags:
+        - Carts
+      responses:
+        "200":
+          description: Producto agregado correctamente
+        "400":
+          description: Error de ID
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/errorId1"
+                  - $ref: "#/components/schemas/errorIdCarrito"
+                  - $ref: "#/components/schemas/errorId2"
+        "500":
+          description: Error al buscar
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/errorBuscar1"
+                  - $ref: "#/components/schemas/errorBuscarCarrito"
+    put:
+      summary: Edita la "quantity" del producto en el carrito
+      tags:
+        - Carts
+      responses:
+        "200":
+          description: Producto editado correctamente
+        "400":
+          description: Cantidad inválida (Debe ser mayor que 1)
+        "404":
+          description: Producto o carrito no encontrados
+        "500":
+          description: Error inesperado
+    delete:
+      summary: Elimina un producto del carrito
+      tags:
+        - Carts
+      responses:
+        "200":
+          description: Producto eliminado correctamente
+        "404":
+          description: Producto o carrito no encontrados
+        "500":
+          description: Error inesperado
+
+
+
+components:
+  schemas:
+    errorBuscarCarrito:
+      type: string
+      description: Error al buscar el carrito
+    errorIdCarrito:
+      type: string
+      description: No existe un carrito con ese ID
+    Carts:
+      type: object
+      properties:
+        products:
+          type: array
+          items:
+            type: object
+            properties:
+              product:
+                type: string
+                description: ID del producto en el carrito
+              quantity:
+                type: integer
+                description: Cantidad del producto en el carrito
+        deleted: 
+          type: boolean
+      required:
+        - Carts

@@ -1,0 +1,24 @@
+<h2>CARRITOS</h2>
+<hr>
+
+{{#if mensajeBienvenida}}
+<div style="color: green;">{{mensajeBienvenida}}</div>
+{{/if}}
+
+<div>
+  {{#each carts}}
+
+  <p>Id: <strong>{{this._id}}</strong></p>
+  <p>Productos:</p>
+  <ul>
+    {{#each this.products}}
+    <li>
+      {{!-- Acceder a las propiedades del objeto product --}}
+      Nombre: {{this.product.title}}<br>
+      Cantidad: {{this.quantity}}
+    </li>
+    {{/each}}
+  </ul>
+  <hr>
+  {{/each}}
+</div>
