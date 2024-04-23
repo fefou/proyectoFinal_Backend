@@ -11,7 +11,7 @@ export class ticketsController {
 
   static async getTickets(req, res) {
     try {
-      const tickets = await ticketsModelo.find();
+      const tickets = await ticketModelo.find();
       res.json(tickets);
     } catch (error) {
       res.status(500).json({ error: error.message });
@@ -20,7 +20,7 @@ export class ticketsController {
 
   static async getTicketById(req, res) {
     try {
-      const ticket = await ticketsModelo.findById(req.params.tid);
+      const ticket = await ticketModelo.findById(req.params.tid);
       res.json(ticket);
     } catch (error) {
       res.status(500).json({ error: error.message });
@@ -29,7 +29,7 @@ export class ticketsController {
 
   static async postTicket(req, res) {
     try {
-      const ticket = new ticketsModelo(req.body);
+      const ticket = new ticketModelo(req.body);
       await ticket.save();
       res.json(ticket);
     } catch (error) {
@@ -39,7 +39,7 @@ export class ticketsController {
 
   static async putTicket(req, res) {
     try {
-      const ticket = await ticketsModelo.findByIdAndUpdate(
+      const ticket = await ticketModelo.findByIdAndUpdate(
         req.params.tid,
         req.body,
         { new: true }
@@ -52,9 +52,17 @@ export class ticketsController {
 
   static async deleteTicket(req, res) {
     try {
-      const ticket = await ticketsModelo.findByIdAndDelete(req.params.tid);
+      const ticket = await ticketModelo.findByIdAndDelete(req.params.tid);
     } catch (error) {
       res.status(500).json({ error: error.message });
+    }
+  }
+
+  static async deleteAllTickets(req, res){
+    try {
+      const resultado = await ticketModelo.deleteMany({});
+    } catch (error) {
+      console.error("Error al eliminar todos los tickets:", error);
     }
   }
 

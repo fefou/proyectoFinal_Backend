@@ -26,7 +26,6 @@ function auth2(permisos = []) {
       if (permisos.includes(req.session.usuario.rol)) {
           return next();
       } else {
-          // Redirige al usuario a la página de inicio de sesión con el mensaje de error
           return res.redirect("/login?error=No%20tienes%20permisos%20suficientes%20para%20acceder");
       }
   };

@@ -16,16 +16,13 @@ describe("Prueba proyecto de Tienda", async function(){
     describe("Prueba del router de Carrito", async function(){
 
         after(async()=>{
-            // let resultado=await mongoose.connection.collection("pets").deleteMany({specie:"TESTING"})
-            // console.log(resultado)
+         
         })
 
         it("La ruta /api/carts, en su metodo POST, permite crear un nuevo carrito ",async()=>{
 
             let carrito=[{name:"Suertudo",specie:"TESTING",birthDate:"2000-03-03"}]
 
-            // let resultado=await requester.post("/api/pets").send(mascota)
-            // console.log(resultado)
             let {statusCode, body, ok}=await requester.post("/api/pets").send(mascota)
 
             expect(statusCode).to.be.equal(200)

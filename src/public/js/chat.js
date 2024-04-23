@@ -19,7 +19,6 @@ Swal.fire({
     inputMensaje.focus()
     document.title = resultado.value
     socket.on('nuevoUsuario', email => {
-        // POPUP  CON AVISO
         Swal.fire({
             text: `Se ha conectado ${email}`,
             toast: true,

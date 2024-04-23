@@ -6,7 +6,6 @@ import { router as vistasRouter } from "./routes/vistasRouter.js";
 import { Server } from "socket.io";
 import __dirname from "./utils.js";
 import path from "path";
-import pm from "./manager/productManager.js";
 import mongoose from "mongoose";
 import { messagesModelo } from "./dao/models/messages.model.js";
 import sessions from "express-session";
@@ -21,7 +20,7 @@ import { middLog } from "./utils/winston.js";
 import swaggerJSDoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
 import { routerT as ticketsRouter } from "./routes/ticketsRouter.js";
-const productos = pm.getProducts();
+
 const app = express();
 const port = process.env.PORT;
 const swaggerOptions = {

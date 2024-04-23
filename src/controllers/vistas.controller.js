@@ -1,7 +1,4 @@
-// import { Router } from "express";
-// import productosJSON from "../json/productos.json" assert { type: "json" };
-// import sessions from "express-session";
-// import mongoose from "mongoose";
+
 import { productsModelo } from "../dao/models/products.model.js";
 import { cartsModelo } from "../dao/models/carts.model.js";
 import { usuariosModelo } from "../dao/models/users.model.js";
@@ -28,7 +25,7 @@ export class VistasController {
     let category = req.query.category || null;
     let sort = req.query.sort || "asc";
 
-    let filter = { deleted: false }; // Agrega el filtro para excluir los productos eliminados
+    let filter = { deleted: false }; 
     if (category) {
       filter.category = category;
     }
@@ -118,7 +115,6 @@ export class VistasController {
     const { cid, pid } = req.params;
     let { quantity } = req.body;
 
-    // Asegúrate de convertir la cantidad a un número
     quantity = parseInt(quantity);
 
     try {
@@ -131,13 +127,10 @@ export class VistasController {
           .json({ message: "Carrito o producto no encontrado" });
       }
 
-      // Verificar si el producto ya está en el carrito
       const existingProductIndex = cart.products.findIndex(item => item.product.toString() === pid);
       if (existingProductIndex !== -1) {
-        // Si el producto ya está en el carrito, actualizar la cantidad
         cart.products[existingProductIndex].quantity += quantity;
       } else {
-        // Si el producto no está en el carrito, agregarlo
         cart.products.push({
           product: pid,
           quantity: quantity,
@@ -162,8 +155,8 @@ export class VistasController {
 
   static async reseteoPass02(req, res) {
     try {
-      const token = req.query.token; // Obteniendo el token de la consulta
-      res.render('recupero02', { token: token }); // Pasando el token a la vista
+      const token = req.query.token; 
+      res.render('recupero02', { token: token });
     } catch (error) {
       return res.status(500).json({ error: error.message });
     }
@@ -188,7 +181,7 @@ export class VistasController {
     let category = req.query.category || null;
     let sort = req.query.sort || "asc";
 
-    let filter = { deleted: false }; // Agrega el filtro para excluir los productos eliminados
+    let filter = { deleted: false };
     if (category) {
       filter.category = category;
     }

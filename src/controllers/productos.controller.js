@@ -81,19 +81,16 @@ export class ProductosController {
     let { title, description, price, code, stock, category } = req.body;
 
     if (!title || !price || !code || !stock || !category) {
-      // Manejar el caso en que falten datos requeridos en el formulario
       return res.status(400).json({ error: "Faltan datos requeridos en el formulario" });
     }
 
     try {
-      // Verificar si ya existe un producto con el mismo título y código
       const existe = await productsModelo.findOne({ title, code });
 
       if (existe) {
         return res.status(400).json({ error: "Ya existe un producto con este título y código" });
       }
 
-      // Crear el nuevo producto
 
       let ownerUser = await usuariosModelo.findById(req.user._id).lean();
       const nuevoProducto = await productsModelo.create({
@@ -103,15 +100,14 @@ export class ProductosController {
         code,
         stock,
         category,
-        owner: ownerUser // Establecer el propietario como el usuario actualmente autenticado
+        owner: ownerUser 
       });
 
       console.log(nuevoProducto)
 
-      // Enviar una respuesta exitosa con el nuevo producto creado
+   
       return res.status(201).json({ success: true, producto: nuevoProducto });
     } catch (error) {
-      // Manejar cualquier error que ocurra durante la creación del producto
       return res.status(500).json({ error: "Error al crear el producto", message: error.message });
     }
   }
@@ -202,7 +198,6 @@ export class ProductosController {
       return res.status(500).json({ error: `Error al buscar producto`, message: error.message });
     }
 
-    // Verificar si el usuario es administrador o propietario del producto
     if (req.user.rol === 'admin' || (req.user.rol === 'premium' && String(req.user._id) === String(producto.owner))) {
       try {
         const resultado = await productsModelo.updateOne(

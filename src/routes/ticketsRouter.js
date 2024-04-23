@@ -8,5 +8,5 @@ routerT.get("/:tid", ticketsController.getTicketById);
 routerT.post("/", ticketsController.postTicket);
 routerT.put("/:tid", ticketsController.putTicket);
 routerT.delete("/:tid", ticketsController.deleteTicket);
-routerT.post('/emailticket', ticketsController.emailTicket)
-
+routerT.post('/emailticket', ticketsController.emailTicket);
+routerT.delete("/", ticketsController.deleteAllTickets);

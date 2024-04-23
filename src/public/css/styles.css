@@ -20,62 +20,60 @@
     color: #000;
 }
 
-/* Establecer fondo oscuro */
 body {
     background-color: #121212;
-    color: #ffffff; /* Color del texto */
-    font-family: 'Arial', sans-serif; /* Tipografía de palo seco */
+    color: #ffffff; 
+    font-family: 'Arial', sans-serif; 
 }
 
-/* Estilo para los enlaces */
+
 a {
-    color: #bb86fc; /* Color del enlace */
+    color: #bb86fc; 
 }
 
-/* Estilo para los enlaces al ser visitados */
 a:visited {
-    color: #3700B3; /* Color del enlace visitado */
+    color: #3700B3; 
 }
 
-/* Estilo para los encabezados */
+
 h1, h2, h3, h4, h5, h6 {
-    color: #ffffff; /* Color del texto */
+    color: #ffffff; 
 }
 
-/* Estilo para las secciones */
+
 section {
-    background-color: #212121; /* Color de fondo */
+    background-color: #212121; 
     padding: 20px;
     margin-bottom: 20px;
     border-radius: 5px;
 }
 
-/* Estilo para los botones */
+
 button {
-    background-color: #6200ee; /* Color de fondo */
-    color: #ffffff; /* Color del texto */
+    background-color: #6200ee;
+    color: #ffffff; 
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
 }
 
-/* Estilo para los botones al pasar el cursor */
+
 button:hover {
-    background-color: #3700b3; /* Color de fondo al pasar el cursor */
+    background-color: #3700b3; 
 }
 
-/* Estilo para los inputs */
+
 input {
-    background-color: #333; /* Color de fondo */
-    color: #ffffff; /* Color del texto */
-    border: 1px solid #777; /* Borde */
+    background-color: #333; 
+    color: #ffffff; 
+    border: 1px solid #777; 
     padding: 5px;
     border-radius: 5px;
 }
 
-/* Estilo para el texto seleccionado */
+
 ::selection {
-    background-color: #6200ee; /* Color de fondo */
-    color: #ffffff; /* Color del texto */
+    background-color: #6200ee;
+    color: #ffffff; 
 }

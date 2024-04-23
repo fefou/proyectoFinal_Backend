@@ -71,8 +71,6 @@ export class SessionsController {
     Haga click en el siguiente enlace: <a href="http://localhost:${config.PORT}/api/sessions/recupero02?token=${token}">Resetear Contraseña</a>`
     let respuesta = await enviarEmail(email, "Recupero Pasword", mensaje)
 
-    // res.setHeader('Content-Type','application/json');
-    // return res.status(200).json({respuesta});
 
     if (respuesta.accepted.length > 0) {
       res.redirect(`http://localhost:${config.PORT}?mensaje=Recibirá en breve un mail, siga los pasos`)

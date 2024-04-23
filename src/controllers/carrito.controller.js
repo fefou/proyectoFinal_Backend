@@ -14,7 +14,6 @@ export class CarritoController {
         .find({ deleted: false })
         .populate("products.product")
         .lean();
-      // carritos = await cartsModelo.paginate({},{lean:true}, {populate:'products.product'})
     } catch (error) {
       req.logger.error(error.message);
     }
@@ -108,7 +107,6 @@ export class CarritoController {
         .json({ error: `No existe producto con id ${pid}` });
     }
 
-    //    si los ID son correctos, entonces agregar el producto al carrito
 
     let resultado;
     let indice = existeCarrito.products.findIndex(

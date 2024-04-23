@@ -13,24 +13,10 @@ function saveProducts(productos) {
     fs.writeFileSync(ruta, JSON.stringify(productos, null, 5))
 }
 
-
-
 routerP.get('/', ProductosController.getProductos)
-
 routerP.get('/:id', ProductosController.getProductoById)
-
-
-// POST
-
 routerP.post('/', ProductosController.postProducto)
-
-// UPDATE
-
 routerP.put('/:id', ProductosController.putProducto)
-
-
-// DELETE 
-
 routerP.delete('/:id', ProductosController.deleteProducto)
 
 export default routerP

@@ -12,20 +12,18 @@ export const inicializarPassport = () => {
     new local.Strategy(
       {
         passReqToCallback: true,
-        usernameField: "email", //, passwordField: 'clave'
+        usernameField: "email", 
       },
       async (req, username, password, done) => {
         try {
           req.logger.info("estrategia local registro de passport");
           let { first_name, email, age, last_name } = req.body;
           if (!first_name || !last_name || !email || !password || !age) {
-            // return res.redirect('/register?error=Complete todos los datos')
             return done(null, false);
           }
 
           let existe = await usuariosModelo.findOne({ email });
           if (existe) {
-            // return res.redirect(`/register?error=El usuario con email ${email} ya existe`)
 
             return done(null, false);
           }
@@ -128,7 +126,6 @@ export const inicializarPassport = () => {
       }
     )
   );
-  // configurar serialización y deserialización
   passport.serializeUser((usuario, done) => {
     return done(null, usuario._id);
   });
@@ -137,4 +134,4 @@ export const inicializarPassport = () => {
     let usuario = await usuariosModelo.findById(id);
     return done(null, usuario);
   });
-}; // fin inicializador passport
+};
