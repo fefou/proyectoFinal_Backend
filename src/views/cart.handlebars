@@ -40,7 +40,6 @@
       .then(response => {
         if (response.ok) {
           return fetch('/api/tickets/emailticket', { method: 'POST' });
-              return res.redirect(`/carts/${carrito}?mensajeBienvenida=Compra realizada`);
         } else {
           throw new Error('Error al realizar la compra');
         }
@@ -48,7 +47,7 @@
       .then(response => {
         if (response.ok) {
           console.log('Compra realizada y correo electrónico enviado');
-              return res.redirect(`/carts/${carrito}?mensajeBienvenida=Compra realizada`);
+          alert("Compra realizada y correo electrónico enviado confirmando")
         } else {
           throw new Error('Error al enviar el correo electrónico del ticket');
         }
